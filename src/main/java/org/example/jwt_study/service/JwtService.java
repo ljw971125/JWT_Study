@@ -60,13 +60,13 @@ public class JwtService {
                 .parser()
                 .verifyWith(generateKey())
                 .build()
-                .parseEncryptedClaims(token)
+                .parseSignedClaims(token)
                 .getPayload();
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUserName(token);
-        
+
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
